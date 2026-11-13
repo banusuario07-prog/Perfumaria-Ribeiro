@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfumaria Ribeiro | Perfumes & Cosméticos Multimarcas</title>
+  <meta name="description" content="Perfumaria Ribeiro - Sua loja multimarcas de perfumes e cosméticos. O Boticário, Natura, Avon, Eudora, O.U.i e Importados com entrega rápida." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style id="dynamic-theme">
+    :root {
+      --primary: #1a1816;
+      --accent: #b88940;
+      --bg: #faf8f5;
+      --card: #ffffff;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: #1f1d1b;
+    }
+    h1, h2, h3, .font-display {
+      font-family: var(--font-heading);
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.18);
+    }
+    .btn-accent {
+      background-color: var(--accent);
+      color: #ffffff;
+      transition: all 0.25s ease;
+    }
+    .btn-accent:hover {
+      filter: brightness(1.08);
+    }
+    .text-accent { color: var(--accent); }
+    .border-accent { border-color: var(--accent); }
+    .bg-primary { background-color: var(--primary); }
+    .bg-accent { background-color: var(--accent); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="antialiased selection:bg-amber-900 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div id="top-bar" class="bg-primary text-white text-xs py-2 px-4 text-center tracking-wider">
+    <span id="announcement-text">FRETE GRÁTIS ACIMA DE R$ 199 • PARCELE EM ATÉ 6X SEM JUROS • CUPOM: <strong>BEMVINDO10</strong></span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-stone-700 hover:text-black" aria-label="Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Logo -->
+        <a href="#" onclick="resetFilters(); return false;" class="flex items-center gap-3 shrink-0">
+          <div id="logo-badge" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-display text-xl font-bold border border-amber-400/50">
+            PR
+          </div>
+          <div>
+            <span id="store-name-display" class="font-display text-2xl sm:text-3xl font-bold tracking-wide text-stone-900 block leading-none">Perfumaria Ribeiro</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-accent font-semibold block mt-0.5">Alta Perfumaria & Cosméticos</span>
+          </div>
+        </a>
+
+        <!-- Search Bar (Desktop) -->
+        <div class="hidden md:flex flex-1 max-w-md mx-6">
+          <div class="relative w-full">
+            <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Buscar perfumes, marcas, hidratantes..."
+              class="w-full pl-10 pr-4 py-2.5 bg-stone-100/80 border border-stone-200 rounded-full text-sm focus:outline-none focus:border-amber-700 focus:bg-white transition" />
+            <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3.5 top-3"></i>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-1 sm:gap-3">
+          <button onclick="openOrdersModal()" class="p-2 text-stone-700 hover:text-black flex items-center gap-1.5 text-xs font-medium" title="Meus Pedidos">
+            <i data-lucide="package" class="w-5 h-5"></i>
+            <span class="hidden xl:inline">Pedidos</span>
+          </button>
+
+          <button onclick="openWishlistModal()" class="relative p-2 text-stone-700 hover:text-black" title="Favoritos">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+            <span id="wishlist-count" class="hidden absolute top-1 right-1 w-4 h-4 bg-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+          </button>
+
+          <button onclick="openCartDrawer()" class="relative p-2 text-stone-700 hover:text-black flex items-center gap-1.5" title="Sacola">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span id="cart-count" class="w-5 h-5 bg-primary text-white text-[11px] font-bold rounded-full flex items-center justify-center">0</span>
+          </button>
+
+          <button onclick="openAdminGate()" class="ml-1 px-3 py-1.5 rounded-full border border-stone-300 hover:border-stone-900 text-xs font-semibold text-stone-800 flex items-center gap-1.5 transition">
+            <i data-lucide="shield-check" class="w-4 h-4 text-accent"></i>
+            <span class="hidden sm:inline">Admin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Search -->
+      <div class="md:hidden pb-3">
+        <div class="relative w-full">
+          <input type="text" id="search-input-mobile" oninput="handleSearch(this.value)" placeholder="Buscar perfume ou marca..."
+            class="w-full pl-9 pr-4 py-2 bg-stone-100 border border-stone-200 rounded-full text-sm focus:outline-none focus:border-amber-700" />
+          <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-2.5"></i>
+        </div>
+      </div>
+
+      <!-- Categories Nav (Desktop) -->
+      <nav id="desktop-categories" class="hidden lg:flex items-center justify-center gap-6 py-2.5 border-t border-stone-100 text-xs font-medium uppercase tracking-wider text-stone-600 overflow-x-auto">
+      </nav>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+    <div class="fixed inset-0 bg-black/50" onclick="toggleMobileMenu()"></div>
+    <div class="relative w-72 max-w-[80vw] bg-white h-full p-6 overflow-y-auto shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <span class="font-display text-2xl font-bold">Categorias</span>
+        <button onclick="toggleMobileMenu()" class="p-1 text-stone-500"><i data-lucide="x" class="w-6 h-6"></i></button>
+      </div>
+      <div id="mobile-categories-list" class="space-y-3 text-sm font-medium"></div>
+      <hr class="my-6 border-stone-200" />
+      <button onclick="toggleMobileMenu(); openAdminGate();" class="w-full py-2.5 px-4 rounded-lg bg-stone-900 text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2">
+        <i data-lucide="lock" class="w-4 h-4"></i> Painel do Lojista
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN STOREFRONT VIEW -->
+  <main id="storefront-view">
+    <!-- HERO BANNER -->
+    <section class="relative overflow-hidden bg-stone-900 text-white">
+      <div class="absolute inset-0">
+        <img id="hero-image" src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1800&q=80" alt="Perfumes de Luxo" class="w-full h-full object-cover opacity-45" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-transparent"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32">
+        <div class="max-w-xl">
+          <span id="hero-tag" class="inline-block px-3 py-1 bg-accent/90 text-white text-[11px] font-semibold uppercase tracking-[0.2em] rounded-full mb-4">
+            Coleção Exclusiva Multimarcas
+          </span>
+          <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-5">
+            Fragrâncias que definem a sua presença.
+          </h1>
+          <p id="hero-subtitle" class="text-stone-200 text-sm sm:text-base leading-relaxed mb-8 font-light">
+            As melhores marcas nacionais e importadas reunidas em um só lugar: O Boticário, Natura, Eudora, O.U.i, Avon e grifes internacionais com entrega rápida.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#catalogo" class="btn-accent px-7 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-lg">
+              Explorar Catálogo
+            </a>
+            <button onclick="filterByTag('promo')" class="px-7 py-3.5 rounded-full border border-white/40 hover:bg-white hover:text-stone-900 text-xs font-semibold uppercase tracking-widest transition">
+              Ver Ofertas
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRANDS CAROUSEL -->
+    <section class="bg-white border-b border-stone-200/70 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-400">Marcas Disponíveis</span>
+          <button onclick="selectBrand('')" class="text-xs text-accent font-semibold hover:underline">Ver todas</button>
+        </div>
+        <div id="brands-bar" class="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-1"></div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS STRIP -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-stone-200/70 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-50 text-accent flex items-center justify-center shrink-0">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-stone-900">100% Originais</p>
+            <p class="text-[11px] text-stone-500">Produtos lacrados e autênticos</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-stone-200/70 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-50 text-accent flex items-center justify-center shrink-0">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-stone-900">Envio Imediato</p>
+            <p class="text-[11px] text-stone-500">Entrega rápida para todo Brasil</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-stone-200/70 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-50 text-accent flex items-center justify-center shrink-0">
+            <i data-lucide="credit-card" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-stone-900">Pix ou Cartão</p>
+            <p class="text-[11px] text-stone-500">5% OFF no Pix ou até 6x sem juros</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-stone-200/70 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-50 text-accent flex items-center justify-center shrink-0">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs font-bold text-stone-900">Consultoria VIP</p>
+            <p class="text-[11px] text-stone-500">Atendimento direto pelo WhatsApp</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG SECTION -->
+    <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Vitrine Exclusiva</span>
+          <h2 id="catalog-heading" class="text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Todos os Produtos</h2>
+        </div>
+
+        <!-- Quick Tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterByTag('all')" id="tab-all" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold bg-primary text-white">Todos</button>
+          <button onclick="filterByTag('bestseller')" id="tab-bestseller" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:border-stone-900">Mais Vendidos</button>
+          <button onclick="filterByTag('new')" id="tab-new" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:border-stone-900">Lançamentos</button>
+          <button onclick="filterByTag('promo')" id="tab-promo" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:border-stone-900">Promoções</button>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="bg-white p-4 rounded-2xl border border-stone-200/80 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 mb-1">Marca</label>
+          <select id="filter-brand" onchange="applyFilters()" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-700">
+            <option value="">Todas as Marcas</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 mb-1">Categoria</label>
+          <select id="filter-category" onchange="applyFilters()" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-700">
+            <option value="">Todas as Categorias</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 mb-1">Faixa de Preço</label>
+          <select id="filter-price" onchange="applyFilters()" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-700">
+            <option value="">Qualquer Preço</option>
+            <option value="0-100">Até R$ 100</option>
+            <option value="100-200">R$ 100 a R$ 200</option>
+            <option value="200-350">R$ 200 a R$ 350</option>
+            <option value="350-9999">Acima de R$ 350</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 mb-1">Ordenar por</label>
+          <select id="filter-sort" onchange="applyFilters()" class="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-700">
+            <option value="featured">Destaques</option>
+            <option value="price-asc">Menor Preço</option>
+            <option value="price-desc">Maior Preço</option>
+            <option value="name-asc">Nome (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+      <!-- Empty State -->
+      <div id="empty-catalog" class="hidden text-center py-16 bg-white rounded-2xl border border-stone-200">
+        <i data-lucide="search-x" class="w-12 h-12 text-stone-300 mx-auto mb-3"></i>
+        <h3 class="text-2xl font-bold text-stone-800">Nenhum produto encontrado</h3>
+        <p class="text-sm text-stone-500 mt-1 mb-5">Tente limpar os filtros ou buscar por outro termo.</p>
+        <button onclick="resetFilters()" class="btn-primary px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider">Limpar Filtros</button>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM & SOCIAL CTA -->
+    <section class="bg-stone-900 text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Comunidade Perfumaria Ribeiro</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mt-2 mb-4">Acompanhe novidades e promoções no Instagram</h2>
+        <p class="text-stone-400 text-sm max-w-xl mx-auto mb-8">Resenhas de fragrâncias, lançamentos exclusivos e cupons relâmpago todos os dias no nosso perfil oficial.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a id="instagram-link" href="https://instagram.com" target="_blank" class="px-7 py-3 rounded-full bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition inline-flex items-center gap-2">
+            <i data-lucide="instagram" class="w-4 h-4"></i> Seguir @perfumariaribeiro
+          </a>
+          <button onclick="openWhatsAppGeneral()" class="px-7 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-widest transition inline-flex items-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> Falar no WhatsApp
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ADMIN PANEL VIEW (HIDDEN BY DEFAULT) -->
+  <section id="admin-view" class="hidden min-h-screen bg-stone-100 pb-20">
+    <div class="bg-stone-900 text-white py-5 px-4 sm:px-8 shadow-md">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center font-bold text-white">
+            <i data-lucide="sliders" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold leading-none">Painel Administrativo</h1>
+            <p class="text-xs text-stone-400 mt-1">Gerenciamento completo da Perfumaria Ribeiro</p>
+          </div>
+        </div>
+        <button onclick="exitAdmin()" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="store" class="w-4 h-4"></i> Voltar para a Loja
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+          <span class="text-xs text-stone-500 font-medium">Faturamento Total</span>
+          <p id="kpi-revenue" class="text-2xl font-bold text-stone-900 mt-1">R$ 0,00</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+          <span class="text-xs text-stone-500 font-medium">Pedidos Recebidos</span>
+          <p id="kpi-orders" class="text-2xl font-bold text-stone-900 mt-1">0</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+          <span class="text-xs text-stone-500 font-medium">Produtos Ativos</span>
+          <p id="kpi-products" class="text-2xl font-bold text-stone-900 mt-1">0</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+          <span class="text-xs text-stone-500 font-medium">Estoque Baixo (&lt; 5)</span>
+          <p id="kpi-lowstock" class="text-2xl font-bold text-amber-600 mt-1">0</p>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex gap-2 overflow-x-auto pb-3 mb-6 border-b border-stone-200">
+        <button onclick="switchAdminTab('products')" id="admin-tab-products" class="admin-nav-btn px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-stone-900 text-white shrink-0">Produtos</button>
+        <button onclick="switchAdminTab('orders')" id="admin-tab-orders" class="admin-nav-btn px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-white text-stone-700 border border-stone-200 shrink-0">Pedidos</button>
+        <button onclick="switchAdminTab('brands')" id="admin-tab-brands" class="admin-nav-btn px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-white text-stone-700 border border-stone-200 shrink-0">Marcas & Categorias</button>
+        <button onclick="switchAdminTab('coupons')" id="admin-tab-coupons" class="admin-nav-btn px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-white text-stone-700 border border-stone-200 shrink-0">Cupons</button>
+        <button onclick="switchAdminTab('appearance')" id="admin-tab-appearance" class="admin-nav-btn px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-white text-stone-700 border border-stone-200 shrink-0">Visual & Configurações</button>
+      </div>
+
+      <!-- TAB 1: PRODUCTS -->
+      <div id="admin-panel-products" class="admin-section">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+          <h2 class="text-2xl font-bold text-stone-900">Catálogo de Produtos</h2>
+          <button onclick="openProductFormModal()" class="btn-accent px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow">
+            <i data-lucide="plus" class="w-4 h-4"></i> Novo Produto
+          </button>
+        </div>
+        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-stone-50 border-b border-stone-200 text-xs uppercase text-stone-500">
+                <tr>
+                  <th class="py-3.5 px-4">Produto</th>
+                  <th class="py-3.5 px-4">Marca</th>
+                  <th class="py-3.5 px-4">Categoria</th>
+                  <th class="py-3.5 px-4">Preço</th>
+                  <th class="py-3.5 px-4">Estoque</th>
+                  <th class="py-3.5 px-4 text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table" class="divide-y divide-stone-100"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: ORDERS -->
+      <div id="admin-panel-orders" class="admin-section hidden">
+        <h2 class="text-2xl font-bold text-stone-900 mb-5">Pedidos Recebidos</h2>
+        <div id="admin-orders-list" class="space-y-4"></div>
+      </div>
+
+      <!-- TAB 3: BRANDS & CATEGORIES -->
+      <div id="admin-panel-brands" class="admin-section hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+          <h3 class="text-xl font-bold mb-4">Gerenciar Marcas</h3>
+          <div class="flex gap-2 mb-4">
+            <input type="text" id="new-brand-name" placeholder="Ex: Lancôme, Dior, Mahogany..." class="flex-1 border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            <button onclick="addBrand()" class="btn-primary px-4 py-2 rounded-lg text-xs font-bold uppercase">Adicionar</button>
+          </div>
+          <ul id="admin-brands-list" class="divide-y divide-stone-100"></ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+          <h3 class="text-xl font-bold mb-4">Gerenciar Categorias</h3>
+          <div class="flex gap-2 mb-4">
+            <input type="text" id="new-category-name" placeholder="Ex: Perfumes Árabes, Kits..." class="flex-1 border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            <button onclick="addCategory()" class="btn-primary px-4 py-2 rounded-lg text-xs font-bold uppercase">Adicionar</button>
+          </div>
+          <ul id="admin-categories-list" class="divide-y divide-stone-100"></ul>
+        </div>
+      </div>
+
+      <!-- TAB 4: COUPONS -->
+      <div id="admin-panel-coupons" class="admin-section hidden">
+        <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm max-w-2xl">
+          <h3 class="text-xl font-bold mb-4">Cupons de Desconto</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+            <input type="text" id="new-coupon-code" placeholder="Código (ex: VIP20)" class="border border-stone-300 rounded-lg px-3 py-2 text-sm uppercase" />
+            <input type="number" id="new-coupon-discount" placeholder="% Desconto (ex: 15)" class="border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            <button onclick="addCoupon()" class="btn-accent px-4 py-2 rounded-lg text-xs font-bold uppercase">Criar Cupom</button>
+          </div>
+          <div id="admin-coupons-list" class="divide-y divide-stone-100"></div>
+        </div>
+      </div>
+
+      <!-- TAB 5: APPEARANCE & SETTINGS -->
+      <div id="admin-panel-appearance" class="admin-section hidden">
+        <form onsubmit="saveStoreSettings(event)" class="bg-white p-6 sm:p-8 rounded-xl border border-stone-200 shadow-sm max-w-3xl space-y-6">
+          <h3 class="text-2xl font-bold">Personalização da Loja</h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Nome da Loja</label>
+              <input type="text" id="set-store-name" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" required />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">WhatsApp da Loja (com DDD)</label>
+              <input type="text" id="set-whatsapp" placeholder="5511999999999" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" required />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Link do Instagram</label>
+              <input type="url" id="set-instagram" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Senha do Painel Admin</label>
+              <input type="text" id="set-admin-pass" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" required />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Cor Principal</label>
+              <input type="color" id="set-primary-color" class="w-full h-10 rounded cursor-pointer border border-stone-300" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Cor de Destaque (Dourado)</label>
+              <input type="color" id="set-accent-color" class="w-full h-10 rounded cursor-pointer border border-stone-300" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Fonte dos Títulos</label>
+              <select id="set-heading-font" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm">
+                <option value="'Cormorant Garamond', serif">Cormorant Garamond (Luxo Clássico)</option>
+                <option value="'Playfair Display', serif">Playfair Display (Editorial)</option>
+                <option value="'Montserrat', sans-serif">Montserrat (Moderna Minimalista)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Aviso da Barra Superior</label>
+            <input type="text" id="set-announcement" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Título do Banner Principal</label>
+            <input type="text" id="set-hero-title" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Subtítulo do Banner Principal</label>
+            <textarea id="set-hero-subtitle" rows="2" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">URL da Imagem do Banner Principal</label>
+            <input type="url" id="set-hero-image" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <button type="submit" class="btn-primary px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Salvar Alterações
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-stone-200 pt-14 pb-10 text-stone-600 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      <div>
+        <span class="font-display text-2xl font-bold text-stone-900 block mb-2">Perfumaria Ribeiro</span>
+        <p class="text-xs leading-relaxed text-stone-500">Curadoria especializada nas melhores marcas de perfumaria e cosméticos nacionais e importados. Qualidade, procedência e atendimento personalizado.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-stone-900 text-xs uppercase tracking-wider mb-3">Categorias</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#catalogo" onclick="selectCategory('Perfumes Femininos')" class="hover:text-black">Perfumes Femininos</a></li>
+          <li><a href="#catalogo" onclick="selectCategory('Perfumes Masculinos')" class="hover:text-black">Perfumes Masculinos</a></li>
+          <li><a href="#catalogo" onclick="selectCategory('Perfumes Importados')" class="hover:text-black">Perfumes Importados</a></li>
+          <li><a href="#catalogo" onclick="selectCategory('Hidratantes')" class="hover:text-black">Hidratantes & Corpo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-stone-900 text-xs uppercase tracking-wider mb-3">Marcas Parceiras</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#catalogo" onclick="selectBrand('O Boticário')" class="hover:text-black">O Boticário</a></li>
+          <li><a href="#catalogo" onclick="selectBrand('Natura')" class="hover:text-black">Natura</a></li>
+          <li><a href="#catalogo" onclick="selectBrand('Eudora')" class="hover:text-black">Eudora</a></li>
+          <li><a href="#catalogo" onclick="selectBrand('O.U.i')" class="hover:text-black">O.U.i Paris</a></li>
+          <li><a href="#catalogo" onclick="selectBrand('Avon')" class="hover:text-black">Avon</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-stone-900 text-xs uppercase tracking-wider mb-3">Atendimento</h4>
+        <p class="text-xs text-stone-500 mb-3">Segunda a Sábado, das 9h às 19h.</p>
+        <button onclick="openWhatsAppGeneral()" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 hover:underline">
+          <i data-lucide="message-circle" class="w-4 h-4"></i> Chamar no WhatsApp
+        </button>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-2">
+      <span>© 2026 Perfumaria Ribeiro. Todos os direitos reservados.</span>
+      <span>Ambiente 100% Seguro • Pix & Cartões</span>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <button onclick="openWhatsAppGeneral()" aria-label="Atendimento WhatsApp"
+    class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl flex items-center justify-center transition transform hover:scale-105">
+    <i data-lucide="message-circle" class="w-7 h-7"></i>
+  </button>
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-xs" onclick="closeProductModal()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl p-6 sm:p-8">
+        <button onclick="closeProductModal()" class="absolute top-4 right-4 p-2 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div id="product-modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER & CHECKOUT -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-xs" onclick="closeCartDrawer()"></div>
+    <div class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+      <div class="p-5 border-b border-stone-200 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-accent"></i>
+          <h3 class="text-xl font-bold">Sua Sacola</h3>
+        </div>
+        <button onclick="closeCartDrawer()" class="p-1.5 text-stone-500 hover:text-black"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+      <div id="cart-footer" class="border-t border-stone-200 p-5 bg-stone-50 space-y-3">
+        <!-- Coupon -->
+        <div class="flex gap-2">
+          <input type="text" id="cart-coupon-input" placeholder="Cupom (ex: BEMVINDO10)" class="flex-1 bg-white border border-stone-300 rounded-lg px-3 py-2 text-xs uppercase" />
+          <button onclick="applyCoupon()" class="px-4 py-2 bg-stone-800 text-white rounded-lg text-xs font-semibold">Aplicar</button>
+        </div>
+
+        <div class="space-y-1 text-xs text-stone-600">
+          <div class="flex justify-between"><span>Subtotal</span><span id="cart-subtotal">R$ 0,00</span></div>
+          <div id="cart-discount-row" class="hidden flex justify-between text-emerald-700 font-semibold"><span>Desconto Cupom</span><span id="cart-discount">- R$ 0,00</span></div>
+          <div class="flex justify-between text-base font-bold text-stone-900 pt-2 border-t border-stone-200">
+            <span>Total</span><span id="cart-total">R$ 0,00</span>
+          </div>
+        </div>
+
+        <button onclick="openCheckoutModal()" class="w-full btn-primary py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest shadow">
+          Finalizar Pedido no Site
+        </button>
+        <button onclick="checkoutViaWhatsApp()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+          <i data-lucide="message-circle" class="w-4 h-4"></i> Pedir pelo WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60" onclick="closeCheckoutModal()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl">
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 p-2 text-stone-400 hover:text-black"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="text-2xl font-bold mb-1">Finalizar Compra</h3>
+        <p class="text-xs text-stone-500 mb-5">Preencha seus dados de entrega e escolha o pagamento.</p>
+
+        <form onsubmit="submitOrder(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold mb-1">Nome Completo *</label>
+            <input type="text" id="chk-name" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" placeholder="Seu nome" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold mb-1">WhatsApp *</label>
+              <input type="tel" id="chk-phone" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" placeholder="(11) 99999-9999" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">CEP *</label>
+              <input type="text" id="chk-cep" required onblur="fetchCep(this.value)" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" placeholder="00000-000" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">Endereço Completo (Rua, Número, Bairro, Cidade) *</label>
+            <input type="text" id="chk-address" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" placeholder="Rua das Flores, 123 - Centro" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold mb-2">Forma de Pagamento *</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="border border-stone-300 rounded-xl p-3 flex items-center gap-2 cursor-pointer has-[:checked]:border-amber-700 has-[:checked]:bg-amber-50/40">
+                <input type="radio" name="paymentMethod" value="Pix (5% OFF)" checked onchange="togglePaymentDetails()" />
+                <span class="text-xs font-bold">Pix (5% OFF)</span>
+              </label>
+              <label class="border border-stone-300 rounded-xl p-3 flex items-center gap-2 cursor-pointer has-[:checked]:border-amber-700 has-[:checked]:bg-amber-50/40">
+                <input type="radio" name="paymentMethod" value="Cartão de Crédito" onchange="togglePaymentDetails()" />
+                <span class="text-xs font-bold">Cartão de Crédito</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="pix-box" class="bg-stone-50 border border-stone-200 rounded-xl p-4 text-center">
+            <p class="text-xs text-stone-600 mb-2">Pagamento instantâneo via Pix com aprovação imediata.</p>
+            <div class="text-xs font-mono bg-white border border-stone-200 p-2 rounded select-all text-stone-700">
+              00020126580014br.gov.bcb.pix0136perfumariaribeiro@loja.com.br
+            </div>
+          </div>
+
+          <div id="card-box" class="hidden space-y-3 bg-stone-50 border border-stone-200 rounded-xl p-4">
+            <input type="text" placeholder="Número do Cartão" class="w-full bg-white border border-stone-300 rounded-lg px-3 py-2 text-xs" />
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" placeholder="Validade (MM/AA)" class="bg-white border border-stone-300 rounded-lg px-3 py-2 text-xs" />
+              <input type="text" placeholder="CVV" class="bg-white border border-stone-300 rounded-lg px-3 py-2 text-xs" />
+            </div>
+            <select id="chk-installments" class="w-full bg-white border border-stone-300 rounded-lg px-3 py-2 text-xs">
+              <option value="1x sem juros">1x sem juros</option>
+              <option value="2x sem juros">2x sem juros</option>
+              <option value="3x sem juros">3x sem juros</option>
+              <option value="6x sem juros">6x sem juros</option>
+            </select>
+          </div>
+
+          <div class="pt-2 border-t border-stone-200 flex items-center justify-between">
+            <span class="text-xs text-stone-500">Total a pagar:</span>
+            <span id="checkout-final-total" class="text-xl font-bold text-stone-900">R$ 0,00</span>
+          </div>
+
+          <button type="submit" class="w-full btn-primary py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest">
+            Confirmar Pedido
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDERS HISTORY MODAL -->
+  <div id="orders-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60" onclick="closeOrdersModal()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl">
+        <button onclick="closeOrdersModal()" class="absolute top-4 right-4 p-2 text-stone-400 hover:text-black"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="text-2xl font-bold mb-1">Meus Pedidos</h3>
+        <p class="text-xs text-stone-500 mb-5">Acompanhe o status das suas compras realizadas.</p>
+        <div id="client-orders-list" class="space-y-3 max-h-96 overflow-y-auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHLIST MODAL -->
+  <div id="wishlist-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60" onclick="closeWishlistModal()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl">
+        <button onclick="closeWishlistModal()" class="absolute top-4 right-4 p-2 text-stone-400 hover:text-black"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="text-2xl font-bold mb-4">Meus Favoritos</h3>
+        <div id="wishlist-items" class="space-y-3 max-h-96 overflow-y-auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 hidden">
+    <div class="fixed inset-0 bg-black/60" onclick="closeAdminGate()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center">
+        <div class="w-12 h-12 rounded-full bg-stone-900 text-accent mx-auto flex items-center justify-center mb-3">
+          <i data-lucide="lock" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-2xl font-bold">Acesso Restrito</h3>
+        <p class="text-xs text-stone-500 mt-1 mb-5">Digite a senha administrativa da Perfumaria Ribeiro.<br>(Senha padrão: <strong>admin123</strong>)</p>
+        <form onsubmit="verifyAdminLogin(event)" class="space-y-3">
+          <input type="password" id="admin-password-input" placeholder="Senha do administrador" required
+            class="w-full border border-stone-300 rounded-lg px-4 py-2.5 text-sm text-center focus:outline-none focus:border-amber-700" />
+          <button type="submit" class="w-full btn-primary py-3 rounded-lg text-xs font-bold uppercase tracking-widest">Entrar no Painel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT ADD/EDIT MODAL (ADMIN) -->
+  <div id="product-form-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="fixed inset-0 bg-black/60" onclick="closeProductFormModal()"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl">
+        <button onclick="closeProductFormModal()" class="absolute top-4 right-4 p-2 text-stone-400 hover:text-black"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 id="product-form-title" class="text-2xl font-bold mb-4">Cadastrar Produto</h3>
+        <form onsubmit="saveProductForm(event)" class="space-y-4">
+          <input type="hidden" id="prod-id" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold mb-1">Nome do Produto *</label>
+              <input type="text" id="prod-name" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Marca *</label>
+              <select id="prod-brand" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Categoria *</label>
+              <select id="prod-category" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Volume / Tamanho *</label>
+              <input type="text" id="prod-volume" placeholder="Ex: 100ml, 200g" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Preço Original (R$) *</label>
+              <input type="number" step="0.01" id="prod-price" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Preço Promocional (R$) (Opcional)</label>
+              <input type="number" step="0.01" id="prod-promo-price" class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Estoque (Unidades) *</label>
+              <input type="number" id="prod-stock" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div class="flex items-center gap-4 pt-5">
+              <label class="flex items-center gap-1.5 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="prod-bestseller" /> Mais Vendido
+              </label>
+              <label class="flex items-center gap-1.5 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="prod-new" /> Lançamento
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold mb-1">URL da Foto do Produto *</label>
+            <input type="url" id="prod-image" required placeholder="https://..." class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold mb-1">Descrição e Notas Olfativas *</label>
+            <textarea id="prod-desc" rows="3" required class="w-full border border-stone-300 rounded-lg px-3 py-2 text-sm"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-primary py-3 rounded-xl text-xs font-bold uppercase tracking-widest">
+            Salvar Produto
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-5 py-3 rounded-full text-xs font-medium shadow-xl opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <script>
+    // ==================== INITIAL DATA & STATE ====================
+    const DEFAULT_DATA = {
+      settings: {
+        storeName: 'Perfumaria Ribeiro',
+        whatsapp: '5511999999999',
+        instagram: 'https://instagram.com',
+        adminPass: 'admin123',
+        primaryColor: '#1a1816',
+        accentColor: '#b88940',
+        headingFont: "'Cormorant Garamond', serif",
+        announcement: 'FRETE GRÁTIS ACIMA DE R$ 199 • PARCELE EM ATÉ 6X SEM JUROS • CUPOM: BEMVINDO10',
+        heroTitle: 'Fragrâncias que definem a sua presença.',
+        heroSubtitle: 'As melhores marcas nacionais e importadas reunidas em um só lugar: O Boticário, Natura, Eudora, O.U.i, Avon e grifes internacionais com entrega rápida.',
+        heroImage: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1800&q=80'
+      },
+      brands: ['O Boticário', 'Natura', 'Eudora', 'O.U.i', 'Avon', 'Importados'],
+      categories: [
+        'Perfumes Femininos',
+        'Perfumes Masculinos',
+        'Perfumes Unissex',
+        'Perfumes Importados',
+        'Hidratantes',
+        'Desodorantes',
+        'Cuidados Pessoais',
+        'Maquiagem',
+        'Kits e Presentes'
+      ],
+      coupons: [
+        { code: 'BEMVINDO10', discount: 10 },
+        { code: 'RIBEIRO15', discount: 15 }
+      ],
+      products: [
+        {
+          id: 'p1',
+          name: 'Malbec Desodorante Colônia',
+          brand: 'O Boticário',
+          category: 'Perfumes Masculinos',
+          volume: '100ml',
+          price: 199.90,
+          promoPrice: 179.90,
+          stock: 15,
+          bestseller: true,
+          isNew: false,
+          image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
+          description: 'Fragrância amadeirada marcante produzida com álcool vínico macerado em barris de carvalho francês. Ideal para homens sofisticados.',
+          reviews: [{ user: 'Carlos M.', rating: 5, comment: 'Fixação excelente, chegou super rápido!' }]
+        },
+        {
+          id: 'p2',
+          name: 'Essencial Oud Feminino',
+          brand: 'Natura',
+          category: 'Perfumes Femininos',
+          volume: '100ml',
+          price: 259.90,
+          promoPrice: 219.90,
+          stock: 10,
+          bestseller: true,
+          isNew: false,
+          image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80',
+          description: 'A opulência do Oud, madeira mais nobre do mundo, combinada à sensualidade da Copaíba e notas florais intensas.',
+          reviews: [{ user: 'Mariana S.', rating: 5, comment: 'Perfume maravilhoso, rende muitos elogios.' }]
+        },
+        {
+          id: 'p3',
+          name: 'Scapin 245 Eau de Parfum',
+          brand: 'O.U.i',
+          category: 'Perfumes Femininos',
+          volume: '75ml',
+          price: 349.00,
+          promoPrice: null,
+          stock: 7,
+          bestseller: true,
+          isNew: true,
+          image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80',
+          description: 'Criado na França, Scapin 245 traz uma assinatura oriental floral envolvente com bergamota, gardênia e madeiras ambaradas.',
+          reviews: []
+        },
+        {
+          id: 'p4',
+          name: 'Eudora Rouge Eau de Parfum',
+          brand: 'Eudora',
+          category: 'Perfumes Femininos',
+          volume: '75ml',
+          price: 229.90,
+          promoPrice: 189.90,
+          stock: 12,
+          bestseller: true,
+          isNew: false,
+          image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=800&q=80',
+          description: 'Chypre floral intenso e elegante, inspirado na confiança e sofisticação do vermelho vibrante.',
+          reviews: []
+        },
+        {
+          id: 'p5',
+          name: 'Lily Acetinado Hidratante Corporal',
+          brand: 'O Boticário',
+          category: 'Hidratantes',
+          volume: '250g',
+          price: 129.90,
+          promoPrice: null,
+          stock: 20,
+          bestseller: true,
+          isNew: false,
+          image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=80',
+          description: 'Textura aveludada que hidrata profundamente por até 48 horas deixando a pele perfumada com a assinatura floral de Lily.',
+          reviews: []
+        },
+        {
+          id: 'p6',
+          name: 'Far Away Glamour Deo Parfum',
+          brand: 'Avon',
+          category: 'Perfumes Femininos',
+          volume: '50ml',
+          price: 99.90,
+          promoPrice: 79.90,
+          stock: 18,
+          bestseller: false,
+          isNew: false,
+          image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=800&q=80',
+          description: 'Notas envolventes de groselha negra, baunilha de Madagascar e almíscar para noites inesquecíveis.',
+          reviews: []
+        },
+        {
+          id: 'p7',
+          name: 'Bleu Intense Eau de Parfum',
+          brand: 'Importados',
+          category: 'Perfumes Importados',
+          volume: '100ml',
+          price: 589.00,
+          promoPrice: 529.00,
+          stock: 4,
+          bestseller: false,
+          isNew: true,
+          image: 'https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=800&q=80',
+          description: 'Aromático amadeirado importado com frescor cítrico refinado e fundo de cedro e incenso.',
+          reviews: []
+        },
+        {
+          id: 'p8',
+          name: 'Kit Presente Kaiak Clássico',
+          brand: 'Natura',
+          category: 'Kits e Presentes',
+          volume: '100ml + Gel Pós-Barba',
+          price: 184.90,
+          promoPrice: 159.90,
+          stock: 9,
+          bestseller: false,
+          isNew: true,
+          image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80',
+          description: 'Presente completo com o frescor aquático icônico de Kaiak acompanhado de embalagem presenteável.',
+          reviews: []
+        }
+      ],
+      orders: []
+    };
+
+    let state = JSON.parse(localStorage.getItem('perfumaria_ribeiro_db')) || DEFAULT_DATA;
+    let cart = JSON.parse(localStorage.getItem('perfumaria_ribeiro_cart')) || [];
+    let wishlist = JSON.parse(localStorage.getItem('perfumaria_ribeiro_wishlist')) || [];
+    let activeCoupon = null;
+    let currentTagFilter = 'all';
+
+    function saveState() {
+      localStorage.setItem('perfumaria_ribeiro_db', JSON.stringify(state));
+    }
+
+    function saveCart() {
+      localStorage.setItem('perfumaria_ribeiro_cart', JSON.stringify(cart));
+      updateBadges();
+    }
+
+    function saveWishlist() {
+      localStorage.setItem('perfumaria_ribeiro_wishlist', JSON.stringify(wishlist));
+      updateBadges();
+    }
+
+    function formatBRL(val) {
+      return Number(val).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('opacity-0');
+      setTimeout(() => t.classList.add('opacity-0'), 2800);
+    }
+
+    // ==================== THEME & BRANDING ====================
+    function applyTheme() {
+      const s = state.settings;
+      document.documentElement.style.setProperty('--primary', s.primaryColor);
+      document.documentElement.style.setProperty('--accent', s.accentColor);
+      document.documentElement.style.setProperty('--font-heading', s.headingFont);
+
+      document.getElementById('store-name-display').textContent = s.storeName;
+      document.title = `${s.storeName} | Perfumes & Cosméticos Multimarcas`;
+      document.getElementById('announcement-text').textContent = s.announcement;
+      document.getElementById('hero-title').textContent = s.heroTitle;
+      document.getElementById('hero-subtitle').textContent = s.heroSubtitle;
+      document.getElementById('hero-image').src = s.heroImage;
+      document.getElementById('instagram-link').href = s.instagram || 'https://instagram.com';
+    }
+
+    // ==================== RENDER NAVIGATION & FILTERS ====================
+    function renderNavigationAndFilters() {
+      // Desktop & Mobile Categories
+      const desktopNav = document.getElementById('desktop-categories');
+      const mobileNav = document.getElementById('mobile-categories-list');
+      const catSelect = document.getElementById('filter-category');
+
+      desktopNav.innerHTML = `<button onclick="selectCategory('')" class="hover:text-black transition whitespace-nowrap">Todos</button>` +
+        state.categories.map(c => `<button onclick="selectCategory('${c}')" class="hover:text-black transition whitespace-nowrap">${c}</button>`).join('');
+
+      mobileNav.innerHTML = `<button onclick="selectCategory(''); toggleMobileMenu();" class="block w-full text-left py-2 border-b border-stone-100">Todos os Produtos</button>` +
+        state.categories.map(c => `<button onclick="selectCategory('${c}'); toggleMobileMenu();" class="block w-full text-left py-2 border-b border-stone-100">${c}</button>`).join('');
+
+      catSelect.innerHTML = `<option value="">Todas as Categorias</option>` +
+        state.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+
+      // Brands Bar & Filter
+      const brandsBar = document.getElementById('brands-bar');
+      const brandSelect = document.getElementById('filter-brand');
+
+      brandsBar.innerHTML = state.brands.map(b => `
+        <button onclick="selectBrand('${b}')" class="px-5 py-2.5 rounded-full border border-stone-200 hover:border-stone-900 bg-stone-50/70 hover:bg-white text-xs font-bold tracking-wider uppercase text-stone-800 whitespace-nowrap transition">
+          ${b}
+        </button>
+      `).join('');
+
+      brandSelect.innerHTML = `<option value="">Todas as Marcas</option>` +
+        state.brands.map(b => `<option value="${b}">${b}</option>`).join('');
+    }
+
+    // ==================== CATALOG FILTERING & RENDERING ====================
+    function selectBrand(brand) {
+      document.getElementById('filter-brand').value = brand;
+      document.getElementById('catalog-heading').textContent = brand ? `Marca: ${brand}` : 'Todos os Produtos';
+      applyFilters();
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectCategory(category) {
+      document.getElementById('filter-category').value = category;
+      document.getElementById('catalog-heading').textContent = category || 'Todos os Produtos';
+      applyFilters();
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterByTag(tag) {
+      currentTagFilter = tag;
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+      });
+      const activeBtn = document.getElementById(`tab-${tag}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-primary', 'text-white');
+        activeBtn.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+      }
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      document.getElementById('search-input').value = val;
+      document.getElementById('search-input-mobile').value = val;
+      applyFilters();
+    }
+
+    function resetFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-input-mobile').value = '';
+      document.getElementById('filter-brand').value = '';
+      document.getElementById('filter-category').value = '';
+      document.getElementById('filter-price').value = '';
+      document.getElementById('filter-sort').value = 'featured';
+      document.getElementById('catalog-heading').textContent = 'Todos os Produtos';
+      filterByTag('all');
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('search-input').value.toLowerCase().trim();
+      const brand = document.getElementById('filter-brand').value;
+      const category = document.getElementById('filter-category').value;
+      const priceRange = document.getElementById('filter-price').value;
+      const sort = document.getElementById('filter-sort').value;
+
+      let filtered = state.products.filter(p => {
+        const finalPrice = p.promoPrice || p.price;
+        if (search && !p.name.toLowerCase().includes(search) && !p.brand.toLowerCase().includes(search) && !p.description.toLowerCase().includes(search)) return false;
+        if (brand && p.brand !== brand) return false;
+        if (category && p.category !== category) return false;
+        if (currentTagFilter === 'bestseller' && !p.bestseller) return false;
+        if (currentTagFilter === 'new' && !p.isNew) return false;
+        if (currentTagFilter === 'promo' && !p.promoPrice) return false;
+        if (priceRange) {
+          const [min, max] = priceRange.split('-').map(Number);
+          if (finalPrice < min || finalPrice > max) return false;
+        }
+        return true;
+      });
+
+      if (sort === 'price-asc') filtered.sort((a, b) => (a.promoPrice || a.price) - (b.promoPrice || b.price));
+      if (sort === 'price-desc') filtered.sort((a, b) => (b.promoPrice || b.price) - (a.promoPrice || a.price));
+      if (sort === 'name-asc') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+      renderProductsGrid(filtered);
+    }
+
+    function renderProductsGrid(list) {
+      const grid = document.getElementById('products-grid');
+      const empty = document.getElementById('empty-catalog');
+
+      if (!list.length) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      grid.innerHTML = list.map(p => {
+        const isFav = wishlist.includes(p.id);
+        const finalPrice = p.promoPrice || p.price;
+        const discountPct = p.promoPrice ? Math.round(((p.price - p.promoPrice) / p.price) * 100) : 0;
+        const outOfStock = p.stock <= 0;
+
+        return `
+          <div class="group bg-white rounded-2xl border border-stone-200/80 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+            <div class="relative aspect-[4/5] bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal('${p.id}')">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+                ${p.promoPrice ? `<span class="px-2.5 py-1 bg-rose-700 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">-${discountPct}% OFF</span>` : ''}
+                ${p.isNew ? `<span class="px-2.5 py-1 bg-stone-900 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">Novo</span>` : ''}
+                ${p.bestseller ? `<span class="px-2.5 py-1 bg-accent text-white text-[10px] font-bold uppercase tracking-wider rounded-full">Top Vendas</span>` : ''}
+              </div>
+              <button onclick="event.stopPropagation(); toggleWishlist('${p.id}')" aria-label="Favoritar"
+                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow text-stone-700 transition">
+                <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-rose-600 text-rose-600' : ''}"></i>
+              </button>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col">
+              <div class="flex items-center justify-between text-[11px] uppercase tracking-wider text-stone-400 font-semibold mb-1">
+                <span>${p.brand}</span>
+                <span>${p.volume}</span>
+              </div>
+              <h3 onclick="openProductModal('${p.id}')" class="font-display text-xl font-bold text-stone-900 leading-snug cursor-pointer hover:text-accent transition line-clamp-2">
+                ${p.name}
+              </h3>
+
+              <div class="mt-auto pt-4">
+                ${p.promoPrice ? `<span class="text-xs text-stone-400 line-through block">${formatBRL(p.price)}</span>` : '<span class="block h-4"></span>'}
+                <div class="flex items-baseline justify-between">
+                  <span class="text-lg font-bold text-stone-900">${formatBRL(finalPrice)}</span>
+                  <span class="text-[11px] text-stone-500">ou 6x ${formatBRL(finalPrice / 6)}</span>
+                </div>
+
+                <button onclick="addToCart('${p.id}')" ${outOfStock ? 'disabled' : ''}
+                  class="mt-4 w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition ${outOfStock ? 'bg-stone-200 text-stone-400 cursor-not-allowed' : 'btn-primary'}">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  ${outOfStock ? 'Esgotado' : 'Adicionar à Sacola'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // ==================== PRODUCT DETAIL MODAL ====================
+    function openProductModal(id) {
+      const p = state.products.find(x => x.id === id);
+      if (!p) return;
+      const finalPrice = p.promoPrice || p.price;
+
+      document.getElementById('product-modal-content').innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="aspect-square rounded-xl overflow-hidden bg-stone-100">
+            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent">${p.brand} • ${p.category}</span>
+            <h2 class="text-3xl font-bold text-stone-900 mt-1">${p.name}</h2>
+            <p class="text-xs text-stone-500 mt-1">Volume: <strong>${p.volume}</strong> • Estoque: <strong>${p.stock} un.</strong></p>
+
+            <div class="my-4 p-3.5 bg-stone-50 rounded-xl border border-stone-200/70">
+              ${p.promoPrice ? `<span class="text-xs text-stone-400 line-through block">${formatBRL(p.price)}</span>` : ''}
+              <span class="text-2xl font-bold text-stone-900">${formatBRL(finalPrice)}</span>
+              <span class="block text-xs text-emerald-700 font-medium mt-0.5">${formatBRL(finalPrice * 0.95)} à vista no Pix (5% OFF)</span>
+            </div>
+
+            <p class="text-sm text-stone-600 leading-relaxed mb-5">${p.description}</p>
+
+            <div class="flex gap-2">
+              <button onclick="addToCart('${p.id}'); closeProductModal();" ${p.stock <= 0 ? 'disabled' : ''}
+                class="flex-1 btn-primary py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+                ${p.stock <= 0 ? 'Indisponível' : 'Comprar Agora'}
+              </button>
+              <button onclick="shareProduct('${p.name}')" class="p-3.5 rounded-xl border border-stone-300 hover:bg-stone-100 text-stone-700" title="Compartilhar">
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('product-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function shareProduct(name) {
+      const text = `Olha esse perfume incrível na Perfumaria Ribeiro: ${name}`;
+      if (navigator.share) {
+        navigator.share({ title: 'Perfumaria Ribeiro', text, url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(`${text} - ${window.location.href}`);
+        showToast('Link copiado para compartilhar!');
+      }
+    }
+
+    // ==================== WISHLIST ====================
+    function toggleWishlist(id) {
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(x => x !== id);
+        showToast('Removido dos favoritos');
+      } else {
+        wishlist.push(id);
+        showToast('Salvo nos seus favoritos!');
+      }
+      saveWishlist();
+      applyFilters();
+    }
+
+    function openWishlistModal() {
+      const container = document.getElementById('wishlist-items');
+      const items = state.products.filter(p => wishlist.includes(p.id));
+      if (!items.length) {
+        container.innerHTML = `<p class="text-sm text-stone-500 text-center py-8">Você ainda não favoritou nenhum produto.</p>`;
+      } else {
+        container.innerHTML = items.map(p => `
+          <div class="flex items-center justify-between gap-3 p-3 border border-stone-200 rounded-xl">
+            <img src="${p.image}" class="w-14 h-14 rounded-lg object-cover" />
+            <div class="flex-1">
+              <p class="text-xs text-stone-400 font-semibold">${p.brand}</p>
+              <p class="text-sm font-bold text-stone-900">${p.name}</p>
+              <p class="text-xs font-bold text-accent">${formatBRL(p.promoPrice || p.price)}</p>
+            </div>
+            <button onclick="addToCart('${p.id}'); closeWishlistModal();" class="btn-primary px-3 py-2 rounded-lg text-xs font-bold">Adicionar</button>
+          </div>
+        `).join('');
+      }
+      document.getElementById('wishlist-modal').classList.remove('hidden');
+    }
+
+    function closeWishlistModal() {
+      document.getElementById('wishlist-modal').classList.add('hidden');
+    }
+
+    // ==================== CART & CHECKOUT ====================
+    function updateBadges() {
+      const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cart-count').textContent = totalItems;
+
+      const wBadge = document.getElementById('wishlist-count');
+      if (wishlist.length > 0) {
+        wBadge.textContent = wishlist.length;
+        wBadge.classList.remove('hidden');
+      } else {
+        wBadge.classList.add('hidden');
+      }
+    }
+
+    function addToCart(id) {
+      const prod = state.products.find(p => p.id === id);
+      if (!prod || prod.stock <= 0) return;
+
+      const existing = cart.find(c => c.id === id);
+      if (existing) {
+        if (existing.qty >= prod.stock) {
+          showToast('Quantidade máxima em estoque atingida.');
+          return;
+        }
+        existing.qty += 1;
+      } else {
+        cart.push({ id, qty: 1 });
+      }
+      saveCart();
+      showToast(`${prod.name} adicionado à sacola!`);
+    }
+
+    function changeCartQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      const prod = state.products.find(p => p.id === id);
+      if (!item || !prod) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(c => c.id !== id);
+      } else if (item.qty > prod.stock) {
+        item.qty = prod.stock;
+        showToast('Limite de estoque atingido');
+      }
+      saveCart();
+      renderCartDrawer();
+    }
+
+    function openCartDrawer() {
+      renderCartDrawer();
+      document.getElementById('cart-drawer').classList.remove('hidden');
+    }
+
+    function closeCartDrawer() {
+      document.getElementById('cart-drawer').classList.add('hidden');
+    }
+
+    function getCartTotals() {
+      let subtotal = 0;
+      cart.forEach(item => {
+        const p = state.products.find(x => x.id === item.id);
+        if (p) subtotal += (p.promoPrice || p.price) * item.qty;
+      });
+      const discount = activeCoupon ? subtotal * (activeCoupon.discount / 100) : 0;
+      const total = Math.max(0, subtotal - discount);
+      return { subtotal, discount, total };
+    }
+
+    function renderCartDrawer() {
+      const container = document.getElementById('cart-items-container');
+      const footer = document.getElementById('cart-footer');
+
+      if (!cart.length) {
+        container.innerHTML = `<div class="text-center py-16"><i data-lucide="shopping-bag" class="w-12 h-12 text-stone-300 mx-auto mb-3"></i><p class="text-sm text-stone-500">Sua sacola está vazia.</p></div>`;
+        footer.classList.add('hidden');
+        lucide.createIcons();
+        return;
+      }
+      footer.classList.remove('hidden');
+
+      container.innerHTML = cart.map(item => {
+        const p = state.products.find(x => x.id === item.id);
+        if (!p) return '';
+        const unitPrice = p.promoPrice || p.price;
+        return `
+          <div class="flex gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200/70">
+            <img src="${p.image}" class="w-16 h-16 rounded-lg object-cover" />
+            <div class="flex-1">
+              <span class="text-[10px] uppercase font-bold text-stone-400">${p.brand}</span>
+              <h4 class="text-xs font-bold text-stone-900 line-clamp-1">${p.name}</h4>
+              <p class="text-xs font-bold text-accent mt-0.5">${formatBRL(unitPrice)}</p>
+              <div class="flex items-center gap-2 mt-2">
+                <button onclick="changeCartQty('${p.id}', -1)" class="w-6 h-6 rounded bg-white border border-stone-300 text-xs font-bold">-</button>
+                <span class="text-xs font-bold px-1">${item.qty}</span>
+                <button onclick="changeCartQty('${p.id}', 1)" class="w-6 h-6 rounded bg-white border border-stone-300 text-xs font-bold">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const { subtotal, discount, total } = getCartTotals();
+      document.getElementById('cart-subtotal').textContent = formatBRL(subtotal);
+      if (discount > 0) {
+        document.getElementById('cart-discount-row').classList.remove('hidden');
+        document.getElementById('cart-discount').textContent = `- ${formatBRL(discount)}`;
+      } else {
+        document.getElementById('cart-discount-row').classList.add('hidden');
+      }
+      document.getElementById('cart-total').textContent = formatBRL(total);
+      lucide.createIcons();
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('cart-coupon-input').value.trim().toUpperCase();
+      const found = state.coupons.find(c => c.code === code);
+      if (found) {
+        activeCoupon = found;
+        showToast(`Cupom ${found.code} (${found.discount}% OFF) aplicado!`);
+        renderCartDrawer();
+      } else {
+        showToast('Cupom inválido ou expirado.');
+      }
+    }
+
+    function openCheckoutModal() {
+      closeCartDrawer();
+      togglePaymentDetails();
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function togglePaymentDetails() {
+      const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const { total } = getCartTotals();
+      if (method.includes('Pix')) {
+        document.getElementById('pix-box').classList.remove('hidden');
+        document.getElementById('card-box').classList.add('hidden');
+        document.getElementById('checkout-final-total').textContent = formatBRL(total * 0.95);
+      } else {
+        document.getElementById('pix-box').classList.add('hidden');
+        document.getElementById('card-box').classList.remove('hidden');
+        document.getElementById('checkout-final-total').textContent = formatBRL(total);
+      }
+    }
+
+    async function fetchCep(cep) {
+      const clean = cep.replace(/\D/g, '');
+      if (clean.length !== 8) return;
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${clean}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
+          document.getElementById('chk-address').value = `${data.logradouro}, Nº - ${data.bairro}, ${data.localidade}/${data.uf}`;
+        }
+      } catch (e) {}
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const { total } = getCartTotals();
+      const finalPaid = method.includes('Pix') ? total * 0.95 : total;
+
+      const itemsSummary = cart.map(item => {
+        const p = state.products.find(x => x.id === item.id);
+        if (p) {
+          p.stock = Math.max(0, p.stock - item.qty);
+          return `${item.qty}x ${p.name} (${p.brand})`;
+        }
+        return '';
+      });
+
+      const order = {
+        id: 'PED-' + Math.floor(100000 + Math.random() * 900000),
+        date: new Date().toLocaleDateString('pt-BR'),
+        customer: document.getElementById('chk-name').value,
+        phone: document.getElementById('chk-phone').value,
+        address: document.getElementById('chk-address').value,
+        payment: method,
+        total: finalPaid,
+        items: itemsSummary,
+        status: 'Pedido Confirmado'
+      };
+
+      state.orders.unshift(order);
+      saveState();
+      cart = [];
+      activeCoupon = null;
+      saveCart();
+      applyFilters();
+      closeCheckoutModal();
+      showToast(`Pedido ${order.id} realizado com sucesso!`);
+      openOrdersModal();
+    }
+
+    function checkoutViaWhatsApp() {
+      const { total } = getCartTotals();
+      const lines = cart.map(item => {
+        const p = state.products.find(x => x.id === item.id);
+        return `• ${item.qty}x ${p.name} (${p.brand}) - ${formatBRL((p.promoPrice || p.price) * item.qty)}`;
+      }).join('\n');
+
+      const msg = encodeURIComponent(`Olá! Gostaria de fazer um pedido na *${state.settings.storeName}*:\n\n${lines}\n\n*Total estimado:* ${formatBRL(total)}`);
+      window.open(`https://wa.me/${state.settings.whatsapp}?text=${msg}`, '_blank');
+    }
+
+    function openWhatsAppGeneral() {
+      const msg = encodeURIComponent(`Olá! Vim pelo site da *${state.settings.storeName}* e gostaria de atendimento.`);
+      window.open(`https://wa.me/${state.settings.whatsapp}?text=${msg}`, '_blank');
+    }
+
+    // ==================== CLIENT ORDERS MODAL ====================
+    function openOrdersModal() {
+      const list = document.getElementById('client-orders-list');
+      if (!state.orders.length) {
+        list.innerHTML = `<p class="text-sm text-stone-500 text-center py-8">Nenhum pedido realizado neste dispositivo ainda.</p>`;
+      } else {
+        list.innerHTML = state.orders.map(o => `
+          <div class="p-4 border border-stone-200 rounded-xl bg-stone-50">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-bold text-stone-900">${o.id} • ${o.date}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900">${o.status}</span>
+            </div>
+            <p class="text-xs text-stone-600 mb-2">${o.items.join(', ')}</p>
+            <div class="flex justify-between text-xs font-bold text-stone-900 pt-2 border-t border-stone-200">
+              <span>${o.payment}</span>
+              <span>${formatBRL(o.total)}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      document.getElementById('orders-modal').classList.remove('hidden');
+    }
+
+    function closeOrdersModal() {
+      document.getElementById('orders-modal').classList.add('hidden');
+    }
+
+    // ==================== MOBILE MENU ====================
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // ==================== ADMIN PANEL LOGIC ====================
+    function openAdminGate() {
+      document.getElementById('admin-password-input').value = '';
+      document.getElementById('admin-login-modal').classList.remove('hidden');
+    }
+
+    function closeAdminGate() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function verifyAdminLogin(e) {
+      e.preventDefault();
+      const input = document.getElementById('admin-password-input').value;
+      if (input === state.settings.adminPass) {
+        closeAdminGate();
+        document.getElementById('storefront-view').classList.add('hidden');
+        document.getElementById('admin-view').classList.remove('hidden');
+        renderAdminDashboard();
+        window.scrollTo(0, 0);
+      } else {
+        showToast('Senha incorreta!');
+      }
+    }
+
+    function exitAdmin() {
+      document.getElementById('admin-view').classList.add('hidden');
+      document.getElementById('storefront-view').classList.remove('hidden');
+      applyTheme();
+      renderNavigationAndFilters();
+      applyFilters();
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
+      document.getElementById(`admin-panel-${tab}`).classList.remove('hidden');
+
+      document.querySelectorAll('.admin-nav-btn').forEach(b => {
+        b.classList.remove('bg-stone-900', 'text-white');
+        b.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+      });
+      const active = document.getElementById(`admin-tab-${tab}`);
+      active.classList.add('bg-stone-900', 'text-white');
+      active.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+    }
+
+    function renderAdminDashboard() {
+      // KPIs
+      const rev = state.orders.reduce((acc, o) => acc + o.total, 0);
+      const lowStock = state.products.filter(p => p.stock < 5).length;
+      document.getElementById('kpi-revenue').textContent = formatBRL(rev);
+      document.getElementById('kpi-orders').textContent = state.orders.length;
+      document.getElementById('kpi-products').textContent = state.products.length;
+      document.getElementById('kpi-lowstock').textContent = lowStock;
+
+      // Products Table
+      document.getElementById('admin-products-table').innerHTML = state.products.map(p => `
+        <tr class="hover:bg-stone-50">
+          <td class="py-3 px-4 flex items-center gap-3">
+            <img src="${p.image}" class="w-10 h-10 rounded object-cover" />
+            <div>
+              <p class="font-bold text-stone-900">${p.name}</p>
+              <span class="text-xs text-stone-400">${p.volume}</span>
+            </div>
+          </td>
+          <td class="py-3 px-4 text-xs font-semibold">${p.brand}</td>
+          <td class="py-3 px-4 text-xs text-stone-500">${p.category}</td>
+          <td class="py-3 px-4 text-xs font-bold">${formatBRL(p.promoPrice || p.price)}</td>
+          <td class="py-3 px-4 text-xs font-bold ${p.stock < 5 ? 'text-rose-600' : 'text-emerald-700'}">${p.stock} un.</td>
+          <td class="py-3 px-4 text-right space-x-2">
+            <button onclick="openProductFormModal('${p.id}')" class="text-xs font-bold text-amber-700 hover:underline">Editar</button>
+            <button onclick="deleteProduct('${p.id}')" class="text-xs font-bold text-rose-600 hover:underline">Excluir</button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Orders List
+      const ordersDiv = document.getElementById('admin-orders-list');
+      if (!state.orders.length) {
+        ordersDiv.innerHTML = `<div class="bg-white p-8 rounded-xl border border-stone-200 text-center text-sm text-stone-500">Nenhum pedido recebido ainda.</div>`;
+      } else {
+        ordersDiv.innerHTML = state.orders.map((o, idx) => `
+          <div class="bg-white p-5 rounded-xl border border-stone-200 flex flex-col sm:flex-row justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold text-accent">${o.id} • ${o.date}</span>
+              <h4 class="font-bold text-stone-900">${o.customer} (${o.phone})</h4>
+              <p class="text-xs text-stone-500 mt-0.5">${o.address}</p>
+              <p class="text-xs text-stone-700 mt-2 font-medium">Itens: ${o.items.join(', ')}</p>
+              <p class="text-xs font-bold text-stone-900 mt-1">Total: ${formatBRL(o.total)} (${o.payment})</p>
+            </div>
+            <div class="flex flex-col justify-between items-end gap-2">
+              <select onchange="updateOrderStatus(${idx}, this.value)" class="border border-stone-300 rounded-lg px-3 py-1.5 text-xs font-semibold">
+                <option ${o.status === 'Pedido Confirmado' ? 'selected' : ''}>Pedido Confirmado</option>
+                <option ${o.status === 'Em Separação' ? 'selected' : ''}>Em Separação</option>
+                <option ${o.status === 'Enviado / Em Rota' ? 'selected' : ''}>Enviado / Em Rota</option>
+                <option ${o.status === 'Entregue' ? 'selected' : ''}>Entregue</option>
+              </select>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Brands & Categories
+      document.getElementById('admin-brands-list').innerHTML = state.brands.map((b, i) => `
+        <li class="py-2.5 flex justify-between items-center text-sm">
+          <span>${b}</span>
+          <button onclick="removeBrand(${i})" class="text-xs text-rose-600 hover:underline">Remover</button>
+        </li>
+      `).join('');
+
+      document.getElementById('admin-categories-list').innerHTML = state.categories.map((c, i) => `
+        <li class="py-2.5 flex justify-between items-center text-sm">
+          <span>${c}</span>
+          <button onclick="removeCategory(${i})" class="text-xs text-rose-600 hover:underline">Remover</button>
+        </li>
+      `).join('');
+
+      // Coupons
+      document.getElementById('admin-coupons-list').innerHTML = state.coupons.map((c, i) => `
+        <div class="py-2.5 flex justify-between items-center text-sm">
+          <span><strong>${c.code}</strong> — ${c.discount}% de desconto</span>
+          <button onclick="removeCoupon(${i})" class="text-xs text-rose-600 hover:underline">Excluir</button>
+        </div>
+      `).join('');
+
+      // Settings Form Fill
+      const s = state.settings;
+      document.getElementById('set-store-name').value = s.storeName;
+      document.getElementById('set-whatsapp').value = s.whatsapp;
+      document.getElementById('set-instagram').value = s.instagram;
+      document.getElementById('set-admin-pass').value = s.adminPass;
+      document.getElementById('set-primary-color').value = s.primaryColor;
+      document.getElementById('set-accent-color').value = s.accentColor;
+      document.getElementById('set-heading-font').value = s.headingFont;
+      document.getElementById('set-announcement').value = s.announcement;
+      document.getElementById('set-hero-title').value = s.heroTitle;
+      document.getElementById('set-hero-subtitle').value = s.heroSubtitle;
+      document.getElementById('set-hero-image').value = s.heroImage;
+
+      lucide.createIcons();
+    }
+
+    function openProductFormModal(id = null) {
+      document.getElementById('prod-brand').innerHTML = state.brands.map(b => `<option value="${b}">${b}</option>`).join('');
+      document.getElementById('prod-category').innerHTML = state.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+
+      if (id) {
+        const p = state.products.find(x => x.id === id);
+        document.getElementById('product-form-title').textContent = 'Editar Produto';
+        document.getElementById('prod-id').value = p.id;
+        document.getElementById('prod-name').value = p.name;
+        document.getElementById('prod-brand').value = p.brand;
+        document.getElementById('prod-category').value = p.category;
+        document.getElementById('prod-volume').value = p.volume;
+        document.getElementById('prod-price').value = p.price;
+        document.getElementById('prod-promo-price').value = p.promoPrice || '';
+        document.getElementById('prod-stock').value = p.stock;
+        document.getElementById('prod-bestseller').checked = p.bestseller;
+        document.getElementById('prod-new').checked = p.isNew;
+        document.getElementById('prod-image').value = p.image;
+        document.getElementById('prod-desc').value = p.description;
+      } else {
+        document.getElementById('product-form-title').textContent = 'Cadastrar Novo Produto';
+        document.getElementById('prod-id').value = '';
+        document.getElementById('prod-name').value = '';
+        document.getElementById('prod-volume').value = '';
+        document.getElementById('prod-price').value = '';
+        document.getElementById('prod-promo-price').value = '';
+        document.getElementById('prod-stock').value = 10;
+        document.getElementById('prod-bestseller').checked = false;
+        document.getElementById('prod-new').checked = true;
+        document.getElementById('prod-image').value = '';
+        document.getElementById('prod-desc').value = '';
+      }
+      document.getElementById('product-form-modal').classList.remove('hidden');
+    }
+
+    function closeProductFormModal() {
+      document.getElementById('product-form-modal').classList.add('hidden');
+    }
+
+    function saveProductForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-id').value;
+      const promoVal = document.getElementById('prod-promo-price').value;
+
+      const productData = {
+        id: id || 'p' + Date.now(),
+        name: document.getElementById('prod-name').value,
+        brand: document.getElementById('prod-brand').value,
+        category: document.getElementById('prod-category').value,
+        volume: document.getElementById('prod-volume').value,
+        price: parseFloat(document.getElementById('prod-price').value),
+        promoPrice: promoVal ? parseFloat(promoVal) : null,
+        stock: parseInt(document.getElementById('prod-stock').value),
+        bestseller: document.getElementById('prod-bestseller').checked,
+        isNew: document.getElementById('prod-new').checked,
+        image: document.getElementById('prod-image').value,
+        description: document.getElementById('prod-desc').value,
+        reviews: []
+      };
+
+      if (id) {
+        const idx = state.products.findIndex(x => x.id === id);
+        if (idx > -1) state.products[idx] = productData;
+        showToast('Produto atualizado!');
+      } else {
+        state.products.unshift(productData);
+        showToast('Produto cadastrado com sucesso!');
+      }
+
+      saveState();
+      closeProductFormModal();
+      renderAdminDashboard();
+    }
+
+    function deleteProduct(id) {
+      if (!confirm('Deseja realmente excluir este produto?')) return;
+      state.products = state.products.filter(p => p.id !== id);
+      saveState();
+      renderAdminDashboard();
+      showToast('Produto excluído.');
+    }
+
+    function updateOrderStatus(idx, status) {
+      state.orders[idx].status = status;
+      saveState();
+      showToast('Status do pedido atualizado!');
+    }
+
+    function addBrand() {
+      const val = document.getElementById('new-brand-name').value.trim();
+      if (!val) return;
+      state.brands.push(val);
+      document.getElementById('new-brand-name').value = '';
+      saveState();
+      renderAdminDashboard();
+      showToast('Marca adicionada!');
+    }
+
+    function removeBrand(i) {
+      state.brands.splice(i, 1);
+      saveState();
+      renderAdminDashboard();
+    }
+
+    function addCategory() {
+      const val = document.getElementById('new-category-name').value.trim();
+      if (!val) return;
+      state.categories.push(val);
+      document.getElementById('new-category-name').value = '';
+      saveState();
+      renderAdminDashboard();
+      showToast('Categoria adicionada!');
+    }
+
+    function removeCategory(i) {
+      state.categories.splice(i, 1);
+      saveState();
+      renderAdminDashboard();
+    }
+
+    function addCoupon() {
+      const code = document.getElementById('new-coupon-code').value.trim().toUpperCase();
+      const discount = parseInt(document.getElementById('new-coupon-discount').value);
+      if (!code || !discount) return;
+      state.coupons.push({ code, discount });
+      document.getElementById('new-coupon-code').value = '';
+      document.getElementById('new-coupon-discount').value = '';
+      saveState();
+      renderAdminDashboard();
+      showToast('Cupom criado!');
+    }
+
+    function removeCoupon(i) {
+      state.coupons.splice(i, 1);
+      saveState();
+      renderAdminDashboard();
+    }
+
+    function saveStoreSettings(e) {
+      e.preventDefault();
+      state.settings = {
+        storeName: document.getElementById('set-store-name').value,
+        whatsapp: document.getElementById('set-whatsapp').value,
+        instagram: document.getElementById('set-instagram').value,
+        adminPass: document.getElementById('set-admin-pass').value,
+        primaryColor: document.getElementById('set-primary-color').value,
+        accentColor: document.getElementById('set-accent-color').value,
+        headingFont: document.getElementById('set-heading-font').value,
+        announcement: document.getElementById('set-announcement').value,
+        heroTitle: document.getElementById('set-hero-title').value,
+        heroSubtitle: document.getElementById('set-hero-subtitle').value,
+        heroImage: document.getElementById('set-hero-image').value
+      };
+      saveState();
+      applyTheme();
+      showToast('Configurações salvas com sucesso!');
+    }
+
+    // ==================== INIT ====================
+    applyTheme();
+    renderNavigationAndFilters();
+    applyFilters();
+    updateBadges();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
